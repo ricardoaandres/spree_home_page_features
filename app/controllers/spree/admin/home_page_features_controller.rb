@@ -1,26 +1,23 @@
 module Spree
   module Admin
-    class HomePageFeaturesController < Spree::Admin::ResourceController
-      def model_class
-        Spree::HomePageFeature
+    class HomePageFeaturesController < ResourceController
+      before_action :load_data, except: [:index]
+
+      protected
+
+      def load_data
+        @taxons = Spree::Taxon.order(:name)
+        @products = Spree::Product.active.order(:name)
       end
 
-      def new_object_url(options = {})
-        spree.new_admin_home_page_feature_path
-      end
+      def collection
+        return @collection if @collection.present?
 
-      def edit_object_url(object, options = {})
-        target = object ? object : @object
-        spree.edit_admin_home_page_feature_url target
-      end
+        @collection = super
+        @collection = @collection.page(params[:page]).
+                                  per(params[:per_page] || Spree::Config[:admin_products_per_page])
 
-      def object_url(object = nil, options = {})
-        target = object ? object : @object
-        spree.edit_admin_home_page_feature_url target
-      end
-
-      def collection_url(options = {})
-        spree.admin_home_page_features_path
+        @collection
       end
     end
   end

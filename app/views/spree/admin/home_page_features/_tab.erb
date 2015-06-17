@@ -1,1 +1,5 @@
-<%= tab :home_page_features, path: spree.admin_home_page_features_path, icon: 'image', label: t(:home_page_features) %>
+<% if can? :admin, Spree::HomePageFeature %>
+  <ul class="nav nav-sidebar">
+    <%= tab Spree.t(:home_page_features), url: spree.admin_home_page_features_path, icon: 'picture' %>
+  </ul>
+<% end %>
