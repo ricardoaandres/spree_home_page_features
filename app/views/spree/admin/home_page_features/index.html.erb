@@ -1,44 +1,46 @@
 <% scope = 'activerecord.attributes.spree/home_page_feature' -%>
-<%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
-<div class="toolbar" data-hook="toolbar">
-  <ul class="actions">
-    <li>
-      <p><%= button_link_to t(:new_home_page_feature), spree.new_admin_home_page_feature_path, :icon => 'add', :id => 'admin_new_home_page_feature_link' %>
-    </p>
-    </li>
-  </ul>
-  <br class="clear" />
-</div>
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::HomePageFeature) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_home_page_feature), new_object_url, { :class => "btn-success", :icon => 'add', :id => 'admin_new_home_page_feature' } %>
+<% end if can?(:create, Spree::HomePageFeature) %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
 
 
-<h1><%= t(:listing_home_page_features) %></h1>
-<table class="index" id='listing_home_page_features'>
-  <thead>
-    <tr>
-      <th><%= t(:title, :scope => scope) %></th>
-      <th><%= t(:style, :scope => scope) %></th>
-      <th><%= t(:published, :scope => scope) %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @home_page_features.each do |home_page_feature|
-         @edit_url = spree.edit_admin_home_page_feature_path(home_page_feature)
-         @delete_url = spree.admin_home_page_feature_path(home_page_feature)
-    %>
-      <tr id="<%= spree_dom_id home_page_feature %>">
-        <td><%= home_page_feature.title %></td>
-        <td><%= home_page_feature.style.humanize %></td>
-        <td><%= home_page_feature.publish.to_s.titleize %></td>
-        <td class="actions">
-          <%= link_to_edit home_page_feature, :class => 'edit' %> &nbsp;
-          <%= link_to_delete home_page_feature, url: spree.admin_home_page_feature_path(home_page_feature) %>
+<% if @collection.any? %>
+  <table class="table" id='listing_home_page_features'>
+    <thead>
+      <tr data-hook="admin_home_page_features_index_headers">
+        <th><%= I18n.t(:title, :scope => scope) %></th>
+        <th><%= I18n.t(:style, :scope => scope) %></th>
+        <th><%= I18n.t(:publish, :scope => scope) %></th>
+        <th data-hook="admin_home_page_features_index_header_actions" class="actions"></th>
       </tr>
-    <% end %>
-    <% if @home_page_features.empty? %>
-      <tr><td colspan="4"><%= t(:none) %></td></tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @collection.each do |home_page_feature| %>
+        <tr id="<%= spree_dom_id home_page_feature %>" data-hook="admin_home_page_features_index_rows" class="<%= cycle('odd', 'even') %>">
+          <td><%= home_page_feature.title %></td>
+          <td><%= home_page_feature.style.present? ? home_page_feature.style.humanize : Spree.t(:none) %></td>
+          <td><%= home_page_feature.publish.to_s.titleize %></td>
+          <td class="actions actions-3 text-right" data-hook="admin_home_page_features_index_row_actions">
+            <%= link_to_edit home_page_feature, no_text: true, class: 'edit' if can?(:edit, home_page_feature) %>
+            <%= link_to_delete home_page_feature, no_text: true if can?(:delete, home_page_feature) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::HomePageFeature)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url %>!
+  </div>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
