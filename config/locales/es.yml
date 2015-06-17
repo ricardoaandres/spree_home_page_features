@@ -1,17 +1,24 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 es:
-  new_home_page_feature: Nueva vitrina
-  home_page_feature: Vitrina
-  home_page_features: Vitrinas
-  listing_home_page_features: Vitrinas
-  editing_home_page_feature: Editar vitrina
-
   activerecord:
+    models:
+      spree/home_page_feature:
+        one: Vitrina
+        other: Vitrinas
     attributes:
       spree/home_page_feature:
-        title: Título
         body: Contenido
+        display_body: Mostrar Contenido
+        display_title: Mostrar Título
+        image: Imagen
+        product: Producto
+        publish: Publicada
         style: Estilo
-        published: Publicada
+        taxon: Categoría
+        title: Título
+
+  spree:
+    editing_home_page_feature: Editar Vitrina
+    home_page_feature: Vitrina
+    home_page_features: Vitrinas
+    new_home_page_feature: Nueva Vitrina
+    none: Ninguno

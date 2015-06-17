@@ -2,16 +2,26 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  new_home_page_feature: "New Feature"
-  home_page_feature: "Home Page Feature"
-  home_page_features: "Home Page Features"
-  listing_home_page_features: "Listing Home Page Features"
-  editing_home_page_feature: "Editing Home Page Feature"
-
   activerecord:
+    models:
+      spree/home_page_feature:
+        one: Banner
+        other: Banners
     attributes:
       spree/home_page_feature:
-        title: "Title"
-        body: "Body"
-        style: "Style"
-        published: "Published"
+        body: Body
+        display_body: Show Body
+        display_title: Show Title
+        image: Image
+        product: Product
+        publish: Published
+        style: Style
+        taxon: Taxon
+        title: Title
+
+  spree:
+    editing_home_page_feature: Edit Banner
+    home_page_feature: Banner
+    home_page_features: Banners
+    new_home_page_feature: New Banner
+    none: None

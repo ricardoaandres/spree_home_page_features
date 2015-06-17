@@ -1,14 +1,24 @@
 hu:
-  new_home_page_feature: "Új kiemelés"
-  home_page_feature: "Kiemelés"
-  home_page_features: "Kiemelések"
-  listing_home_page_features: "Kiemelések listázása"
-  editing_home_page_feature: "Kiemelés szerkesztése"
-
   activerecord:
+    models:
+      spree/home_page_feature:
+        one: "Kiemelés"
+        other: "Kiemelések"
     attributes:
       spree/home_page_feature:
-        title: "Cím"
         body: "Törzs"
-        style: "Stílus"
+        display_body: Show Body
+        display_title: Show Title
+        image: Image
+        product: Product
         published: "Publikálva"
+        style: "Stílus"
+        taxon: Taxon
+        title: "Cím"
+
+  spree:
+    editing_home_page_feature: "Kiemelés szerkesztése"
+    home_page_feature: "Kiemelés"
+    home_page_features: "Kiemelések"
+    new_home_page_feature: "Új kiemelés"
+    none: None
