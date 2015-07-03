@@ -1,31 +1,44 @@
-<% features = Spree::HomePageFeature.published %>
+<% features = Spree::Banner.published %>
+
 <% if features.any? %>
-  <div class="home-page-features-slider flexslider">
-    <ul class="slides">
-      <% features.each do |feature| %>
-        <li class="feature<%= feature.style? ? " " + feature.style : "" %>">
-          <% if feature.product %>
-            <%= link_to tag(:span), spree.product_path(feature.product) %>
-          <% elsif feature.taxon %>
-            <%= link_to tag(:span), seo_url(feature.taxon) %>
-          <% end %>
+  <!-- Carrusel -->
+  <div id="carousel-casa-amarilla" class="carousel slide" data-ride="carousel">
 
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <% features.each_with_index do |feature, index| %>
+        <div class="item <%= index == 0 ? 'active' : '' %> feature <%= feature.style? ? feature.style : '' %>">
           <% if feature.image_file_name.present? %>
-            <%= image_tag feature.image.url %>
+            <%= image_tag feature.image.url, :class => 'img-responsive' %>
           <% end %>
 
-          <% if feature.display_texts? %>
-            <div class="info">
-              <% if feature.display_title? %>
-                <h4><%= feature.title %></h4>
-              <% end %>
-              <% if feature.display_body? %>
-                <div><%= feature.body %></div>
-              <% end %>
-            </div>
-          <% end %>
-        </li>
+          <div class="carousel-caption">
+             <% if feature.display_title? %>
+              <h3><%= feature.title %></h3>
+            <% end %>
+
+            <% if feature.product %>
+              <%= link_to tag(:span), spree.product_path(feature.product) %>
+            <% elsif feature.taxon %>
+              <%= link_to tag(:span), seo_url(feature.taxon) %>
+            <% end %>
+
+            <% if feature.display_body? %>
+              <p><%= feature.body %></p>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    </ul>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-casa-amarilla" role="button" data-slide="prev">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-casa-amarilla" role="button" data-slide="next">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
 <% end %>
