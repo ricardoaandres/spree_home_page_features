@@ -1,0 +1,4 @@
+<ul id="sidebar-banners" class="collapse nav nav-pills nav-stacked" data-hook="admin_banners_sub_tabs">
+  <%= tab Spree::BannerCategory.model_name.human.pluralize, url: spree.admin_banner_categories_path %>
+  <%= tab Spree::Banner.model_name.human.pluralize, url: spree.admin_banners_path %>
+</ul>

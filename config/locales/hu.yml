@@ -7,6 +7,9 @@ hu:
       spree/banner:
         one: "Kiemelés"
         other: "Kiemelések"
+      spree/banner_category:
+        one: Kiemelés Kategória
+        other: Kiemelés Kategóriák
     attributes:
       spree/banner:
         body: "Törzs"
@@ -18,6 +21,9 @@ hu:
         style: "Stílus"
         taxon: Taxon
         title: "Cím"
+      spree/banner_category:
+        name: Név
+        size: Méret
 
   spree:
     editing_banner: "Kiemelés szerkesztése"

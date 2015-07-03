@@ -7,6 +7,9 @@ en:
       spree/banner:
         one: Banner
         other: Banners
+      spree/banner_category:
+        one: Banner Category
+        other: Banner Categories
     attributes:
       spree/banner:
         body: Body
@@ -18,6 +21,9 @@ en:
         style: Style
         taxon: Taxon
         title: Title
+      spree/banner_category:
+        name: Name
+        size: Size
 
   spree:
     editing_banner: Edit Banner

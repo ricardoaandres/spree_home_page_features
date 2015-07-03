@@ -7,6 +7,9 @@ es:
       spree/banner:
         one: Vitrina
         other: Vitrinas
+      spree/banner_category:
+        one: Banner Category
+        other: Banner Categories
     attributes:
       spree/banner:
         body: Contenido
@@ -18,6 +21,9 @@ es:
         style: Estilo
         taxon: Categoría
         title: Título
+      spree/banner_category:
+        name: Nombre
+        size: Tamaño
 
   spree:
     editing_banner: Editar Vitrina
