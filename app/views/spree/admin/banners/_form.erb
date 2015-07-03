@@ -1,40 +1,46 @@
 <div data-hook="admin_banner_form_fields">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-9">
       <%= f.field_container :title, class: ['form-group'] do %>
         <%= f.label :title %>
         <%= f.text_field :title, class: 'form-control' %>
         <%= error_message_on :banner, :title %>
       <% end %>
-    </div>
 
-    <div class="col-md-6">
-      <%= f.field_container :display_title, class: ['form-group'] do %>
-        <%= f.label :display_title %>
-        <%= f.check_box :display_title, class: 'form-control' %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.field_container :body, class: ['form-group'] do %>
+       <%= f.field_container :body, class: ['form-group'] do %>
         <%= f.label :body %>
-        <%= f.text_area :body, class: 'form-control' %>
+        <%= f.text_area :body, class: 'form-control', rows: 5 %>
         <%= error_message_on :banner, :body %>
       <% end %>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-3">
+      <%= f.field_container :display_title, class: ['form-group'] do %>
+        <%= f.label :display_title %>
+        <%= f.check_box :display_title, class: 'form-control' %>
+      <% end %>
+
       <%= f.field_container :display_body, class: ['form-group'] do %>
         <%= f.label :display_body %>
         <%= f.check_box :display_body, class: 'form-control' %>
+      <% end %>
+
+      <%= f.field_container :publish, class: ['form-group'] do %>
+        <%= f.label :publish %>
+        <%= f.check_box :publish, class: 'form-control' %>
       <% end %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
+      <%= f.field_container :banner_category_id, class: ['form-group'] do %>
+        <%= f.label :banner_category_id %>
+        <%= f.collection_select :banner_category_id, @banner_categories, :id, :name, { include_blank: Spree.t(:none) }, { class: 'select2' } %>
+      <% end %>
+    </div>
+
+    <div class="col-md-4">
       <%= f.field_container :image, class: ['form-group'] do %>
         <%= f.label :image %>
         <%= f.file_field :image, class: 'form-control' %>
@@ -42,35 +48,30 @@
       <% end %>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <%= f.field_container :style, class: ['form-group'] do %>
         <%= f.label :style %>
-        <%= f.select :style, Spree::HomePageFeature.styles_dropdown, { include_blank: Spree.t(:none) }, { class: 'select2' } %>
+        <%= f.select :style, Spree::Banner.styles_dropdown, { include_blank: Spree.t(:none) }, { class: 'select2' } %>
       <% end %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
+
+    </div>
+
+    <div class="col-md-4">
       <%= f.field_container :product, class: ['form-group'] do %>
         <%= f.label :product %>
         <%= f.collection_select :product_id, @products, :id, :name, { include_blank: Spree.t(:none) }, { class: 'select2' } %>
       <% end %>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <%= f.field_container :taxon, class: ['form-group'] do %>
         <%= f.label :taxon %>
         <%= f.collection_select :taxon_id, @taxons, :id, :name_with_parents, { include_blank: Spree.t(:none) }, { class: 'select2' } %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <%= f.field_container :publish, class: ['form-group'] do %>
-        <%= f.label :publish %>
-        <%= f.check_box :publish, class: 'form-control' %>
       <% end %>
     </div>
   </div>

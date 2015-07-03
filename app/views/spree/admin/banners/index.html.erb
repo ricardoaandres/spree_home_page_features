@@ -6,7 +6,7 @@
 
 <% content_for :page_actions do %>
   <%= button_link_to Spree.t(:new_banner), new_object_url, { :class => "btn-success", :icon => 'add', :id => 'admin_new_banner' } %>
-<% end if can?(:create, Spree::HomePageFeature) %>
+<% end if can?(:create, Spree::Banner) %>
 
 <%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
 
@@ -14,9 +14,10 @@
   <table class="table" id='listing_banners'>
     <thead>
       <tr data-hook="admin_banners_index_headers">
-        <th><%= I18n.t(:title, :scope => scope) %></th>
-        <th><%= I18n.t(:style, :scope => scope) %></th>
-        <th><%= I18n.t(:publish, :scope => scope) %></th>
+        <th><%= Spree::Banner.human_attribute_name(:title) %></th>
+        <th><%= Spree::Banner.human_attribute_name(:style) %></th>
+        <th><%= Spree::Banner.human_attribute_name(:banner_category) %></th>
+        <th><%= Spree::Banner.human_attribute_name(:publish) %></th>
         <th data-hook="admin_banners_index_header_actions" class="actions"></th>
       </tr>
     </thead>
@@ -25,7 +26,8 @@
         <tr id="<%= spree_dom_id banner %>" data-hook="admin_banners_index_rows" class="<%= cycle('odd', 'even') %>">
           <td><%= banner.title %></td>
           <td><%= banner.style.present? ? banner.style.humanize : Spree.t(:none) %></td>
-          <td><%= banner.publish.to_s.titleize %></td>
+          <td><%= banner.banner_category_name %></td>
+          <td><%= banner.publish_icon %></td>
           <td class="actions actions-3 text-right" data-hook="admin_banners_index_row_actions">
             <%= link_to_edit banner, no_text: true, class: 'edit' if can?(:edit, banner) %>
             <%= link_to_delete banner, no_text: true if can?(:delete, banner) %>
@@ -37,7 +39,7 @@
 
 <% else %>
   <div class="alert alert-info no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::HomePageFeature)) %>,
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Banner)) %>,
     <%= link_to Spree.t(:add_one), new_object_url %>!
   </div>
 <% end %>

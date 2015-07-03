@@ -1,5 +1,7 @@
 module Spree
   class Banner < ActiveRecord::Base
+    include GlobalID::Identification
+
     validates :title, presence: true, length: { minimum: 1 }
     validates :body,  presence: true, length: { minimum: 1 }, unless: :image
 
@@ -15,6 +17,13 @@ module Spree
 
     belongs_to :product
     belongs_to :taxon
+    belongs_to :banner_category
+
+    delegate :name, to: :banner_category, prefix: true, allow_nil: true
+
+    def publish_icon
+      self.publish ? "<i class='icon icon-ok'></i>".html_safe : '<br/>'.html_safe
+    end
 
     class << self
       def styles
@@ -38,7 +47,7 @@ module Spree
       [
        :title, :body, :publish, :style, :image, :product_id, :taxon_id,
        :image_file_name, :image_file_size, :image_content_type, :image_updated_at,
-       :display_title, :display_body
+       :display_title, :display_body, :banner_category_id
       ]
     end
   end

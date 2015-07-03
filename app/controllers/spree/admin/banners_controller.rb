@@ -8,6 +8,7 @@ module Spree
       def load_data
         @taxons = Spree::Taxon.order(:name)
         @products = Spree::Product.active.order(:name)
+        @banner_categories = Spree::BannerCategory.order(:name)
       end
 
       def collection
