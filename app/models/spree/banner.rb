@@ -22,6 +22,12 @@ module Spree
 
     delegate :name, to: :banner_category, prefix: true, allow_nil: true
 
+    before_update :update_geometry
+
+    def update_geometry
+      BannerGeometryJob.perform_later(self) unless image_updated_at_changed?
+    end
+
     def image_styles
       if banner_category
         { original: banner_category.size }
