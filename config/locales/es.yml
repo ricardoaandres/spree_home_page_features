@@ -8,8 +8,8 @@ es:
         one: Vitrina
         other: Vitrinas
       spree/banner_category:
-        one: Banner Category
-        other: Banner Categories
+        one: Categoría Vitrina
+        other: Categoría Vitrinas
     attributes:
       spree/banner:
         body: Contenido
@@ -31,3 +31,7 @@ es:
     banners: Vitrinas
     new_banner: Nueva Vitrina
     none: Ninguno
+    editing_banner_category: Editar Categoría Vitrina
+    banner_category: Categoría Vitrina
+    banner_categories: Categoría Vitrinas
+    new_banner_category: Nueva Categoría Vitrina

@@ -1,0 +1,19 @@
+<div data-hook="admin_banner_category_form_fields">
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.field_container :name, class: ['form-group'] do %>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+        <%= error_message_on :banner_category, :name %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.field_container :size, class: ['form-group'] do %>
+        <%= f.label :size %>
+        <%= f.text_field :size, class: 'form-control' %>
+        <%= error_message_on :banner_category, :size %>
+      <% end %>
+    </div>
+  </div>
+</div>

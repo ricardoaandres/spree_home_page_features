@@ -1,0 +1,10 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:editing_banner_category) %>
+<% end %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @banner_category } %>
+
+<%= form_for [:admin, @banner_category], html: { multipart: true } do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+<% end %>

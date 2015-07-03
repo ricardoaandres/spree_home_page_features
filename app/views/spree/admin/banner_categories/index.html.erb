@@ -1,0 +1,41 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::BannerCategory) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_banner_category), new_object_url, { :class => "btn-success", :icon => 'add', :id => 'admin_new_banner_category' } %>
+<% end if can?(:create, Spree::BannerCategory) %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
+
+<% if @collection.any? %>
+  <table class="table" id='listing_banner_categories'>
+    <thead>
+      <tr data-hook="admin_banner_categories_index_headers">
+        <th><%= Spree::BannerCategory.human_attribute_name(:name) %></th>
+        <th><%= Spree::BannerCategory.human_attribute_name(:size) %></th>
+        <th data-hook="admin_banner_categories_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @collection.each do |banner_category| %>
+        <tr id="<%= spree_dom_id banner_category %>" data-hook="admin_banner_categories_index_rows" class="<%= cycle('odd', 'even') %>">
+          <td><%= banner_category.name %></td>
+          <td><%= banner_category.size %></td>
+          <td class="actions actions-3 text-right" data-hook="admin_banners_index_row_actions">
+            <%= link_to_edit banner_category, no_text: true, class: 'edit' if can?(:edit, banner_category) %>
+            <%= link_to_delete banner_category, no_text: true if can?(:delete, banner_category) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::BannerCategory)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url %>!
+  </div>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>

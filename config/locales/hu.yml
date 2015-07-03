@@ -31,3 +31,7 @@ hu:
     banners: "Kiemelések"
     new_banner: "Új kiemelés"
     none: None
+    editing_banner_category: "Kiemelés Kategória szerkesztése"
+    banner_category: "Kiemelés Kategória"
+    banner_categories: "Kiemelés Kategóriák"
+    new_banner_category: "Új kiemelés Kategóriák"
