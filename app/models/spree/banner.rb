@@ -7,7 +7,8 @@ module Spree
 
     has_attached_file :image,
                       :url => '/spree/banners/:id/:style/:basename.:extension',
-                      :path => ':rails_root/public/spree/banners/:id/:style/:basename.:extension'
+                      :path => ':rails_root/public/spree/banners/:id/:style/:basename.:extension',
+                      :styles => Proc.new { |attachment| attachment.instance.image_styles }
 
     validates_attachment_presence :image, unless: :body
 
@@ -20,6 +21,14 @@ module Spree
     belongs_to :banner_category
 
     delegate :name, to: :banner_category, prefix: true, allow_nil: true
+
+    def image_styles
+      if banner_category
+        { original: banner_category.size }
+      else
+        {}
+      end
+    end
 
     def publish_icon
       self.publish ? "<i class='icon icon-ok'></i>".html_safe : '<br/>'.html_safe
