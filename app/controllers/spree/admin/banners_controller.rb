@@ -1,6 +1,6 @@
 module Spree
   module Admin
-    class HomePageFeaturesController < ResourceController
+    class BannersController < Spree::Admin::ResourceController
       before_action :load_data, except: [:index]
 
       protected

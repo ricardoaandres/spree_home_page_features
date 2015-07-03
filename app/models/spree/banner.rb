@@ -1,22 +1,15 @@
 module Spree
-  class HomePageFeature < ActiveRecord::Base
-
-    validates :title,
-      presence: true,
-      length: { minimum: 1 }
-
-    validates :body,
-      presence: true,
-      length: { minimum: 1 },
-      unless: :image
+  class Banner < ActiveRecord::Base
+    validates :title, presence: true, length: { minimum: 1 }
+    validates :body,  presence: true, length: { minimum: 1 }, unless: :image
 
     has_attached_file :image,
-                      :url => '/spree/home_page_features/:id/:style/:basename.:extension',
-                      :path => ':rails_root/public/spree/home_page_features/:id/:style/:basename.:extension'
+                      :url => '/spree/banners/:id/:style/:basename.:extension',
+                      :path => ':rails_root/public/spree/banners/:id/:style/:basename.:extension'
 
     validates_attachment_presence :image, unless: :body
 
-    validates_attachment_content_type :image, :content_type => ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
+    validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/
 
     scope :published, -> { where publish: true }
 

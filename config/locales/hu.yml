@@ -1,11 +1,14 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
 hu:
   activerecord:
     models:
-      spree/home_page_feature:
+      spree/banner:
         one: "Kiemelés"
         other: "Kiemelések"
     attributes:
-      spree/home_page_feature:
+      spree/banner:
         body: "Törzs"
         display_body: Show Body
         display_title: Show Title
@@ -17,8 +20,8 @@ hu:
         title: "Cím"
 
   spree:
-    editing_home_page_feature: "Kiemelés szerkesztése"
-    home_page_feature: "Kiemelés"
-    home_page_features: "Kiemelések"
-    new_home_page_feature: "Új kiemelés"
+    editing_banner: "Kiemelés szerkesztése"
+    banner: "Kiemelés"
+    banners: "Kiemelések"
+    new_banner: "Új kiemelés"
     none: None

@@ -1,77 +1,38 @@
-<div data-hook="admin_home_page_feature_form_fields">
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.field_container :title, class: ['form-group'] do %>
-        <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control' %>
-        <%= error_message_on :home_page_feature, :title %>
-      <% end %>
-    </div>
+<% scope = 'activerecord.attributes.spree/banners' -%>
 
-    <div class="col-md-6">
-      <%= f.field_container :display_title, class: ['form-group'] do %>
-        <%= f.label :display_title %>
-        <%= f.check_box :display_title, class: 'form-control' %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.field_container :body, class: ['form-group'] do %>
-        <%= f.label :body %>
-        <%= f.text_area :body, class: 'form-control' %>
-        <%= error_message_on :home_page_feature, :body %>
-      <% end %>
-    </div>
-
-    <div class="col-md-6">
-      <%= f.field_container :display_body, class: ['form-group'] do %>
-        <%= f.label :display_body %>
-        <%= f.check_box :display_body, class: 'form-control' %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.field_container :image, class: ['form-group'] do %>
-        <%= f.label :image %>
-        <%= f.file_field :image, class: 'form-control' %>
-        <%= error_message_on :home_page_feature, :image %>
-      <% end %>
-    </div>
-
-    <div class="col-md-6">
-      <%= f.field_container :style, class: ['form-group'] do %>
-        <%= f.label :style %>
-        <%= f.select :style, Spree::HomePageFeature.styles_dropdown, { include_blank: Spree.t(:none) }, { class: 'select2' } %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.field_container :product, class: ['form-group'] do %>
-        <%= f.label :product %>
-        <%= f.collection_select :product_id, @products, :id, :name, { include_blank: Spree.t(:none) }, { class: 'select2' } %>
-      <% end %>
-    </div>
-
-    <div class="col-md-6">
-      <%= f.field_container :taxon, class: ['form-group'] do %>
-        <%= f.label :taxon %>
-        <%= f.collection_select :taxon_id, @taxons, :id, :name_with_parents, { include_blank: Spree.t(:none) }, { class: 'select2' } %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <%= f.field_container :publish, class: ['form-group'] do %>
-        <%= f.label :publish %>
-        <%= f.check_box :publish, class: 'form-control' %>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= f.field_container :title do %>
+  <%= f.label :title, t(:title, :scope => scope) %><br />
+  <%= f.text_field :title %>
+<% end %>
+<%= f.field_container :display_title do %>
+  <%= f.label :display_title, t(:display_title, :scope => scope) %><br />
+  <%= f.check_box :display_title %>
+<% end %>
+<%= f.field_container :body do %>
+  <%= f.label :body, t(:body, :scope => scope) %><br />
+  <%= f.text_area :body %>
+<% end %>
+<%= f.field_container :display_body do %>
+  <%= f.label :display_body, t(:display_body, :scope => scope) %><br />
+  <%= f.check_box :display_body %>
+<% end %>
+<%= f.field_container :image do %>
+  <%= f.label :image, t(:image, :scope => scope) %><br />
+  <%= f.file_field :image %>
+<% end %>
+<%= f.field_container :style do %>
+  <%= f.label :style, t(:style, :scope => scope) %><br />
+  <%= f.select :style, Spree::HomePageFeature.styles_dropdown %>
+<% end %>
+<%= f.field_container :publish do %>
+  <%= f.label :publish, t(:published, :scope => scope) %><br />
+  <%= f.check_box :publish %>
+<% end %>
+<%= f.field_container :product_id do %>
+  <%= f.label :product_id, t(:product, :scope => scope) %><br />
+  <%= f.select :product_id, Spree::Product.active.order(:name).map {|p| [p.name, p.id]}, include_blank: 'None' %><br />
+<% end %>
+<%= f.field_container :taxon_id do %>
+  <%= f.label :taxon_id, t(:taxon, :scope => scope) %><br />
+  <%= f.select :taxon_id, Spree::Taxon.order(:name).all.map {|t| [t.name_with_parents, t.id]}, include_blank: 'None' %><br />
+<% end %>

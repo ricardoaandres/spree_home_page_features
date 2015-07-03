@@ -4,11 +4,11 @@
 en:
   activerecord:
     models:
-      spree/home_page_feature:
+      spree/banner:
         one: Banner
         other: Banners
     attributes:
-      spree/home_page_feature:
+      spree/banner:
         body: Body
         display_body: Show Body
         display_title: Show Title
@@ -20,8 +20,8 @@ en:
         title: Title
 
   spree:
-    editing_home_page_feature: Edit Banner
-    home_page_feature: Banner
-    home_page_features: Banners
-    new_home_page_feature: New Banner
+    editing_banner: Edit Banner
+    banner: Banner
+    banners: Banners
+    new_banner: New Banner
     none: None

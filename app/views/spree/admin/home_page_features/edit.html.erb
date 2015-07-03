@@ -1,10 +1,10 @@
-<% content_for :page_title do %>
-  <%= Spree.t(:editing_home_page_feature) %>
-<% end %>
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
-<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @home_page_feature } %>
+<h1><% t(:editing_banner) %></h1>
 
-<%= form_for [:admin, @home_page_feature], html: { multipart: true } do |f| %>
-  <%= render partial: 'form', locals: { f: f } %>
-  <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @banner } %>
+
+<%= form_for [:admin, @banner], url: spree.admin_banner_path(@banner), html: { multipart: true } do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
 <% end %>
