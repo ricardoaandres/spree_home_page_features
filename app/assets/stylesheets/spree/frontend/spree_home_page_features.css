@@ -1,12 +1,4 @@
 /*
- *= require flexslider
- */
-
-.home-page-features-slider .feature a span {
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  position: absolute;
-  z-index: 1;
-}
+Placeholder manifest file.
+the installer will append this file to the app vendored assets here: 'vendor/assets/stylesheets/spree/frontend/all.css'
+*/
