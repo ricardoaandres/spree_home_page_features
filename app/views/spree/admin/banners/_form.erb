@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <%= f.field_container :title, class: ['form-group'] do %>
-        <%= f.label :title %>
+        <%= f.label :title %><span class="required">*</span><br />
         <%= f.text_field :title, class: 'form-control' %>
         <%= error_message_on :banner, :title %>
       <% end %>
@@ -58,7 +58,11 @@
 
   <div class="row">
     <div class="col-md-4">
-
+    <%= f.field_container :url, class: ['form-group'] do %>
+        <%= f.label :url %>
+        <%= f.text_field :url, class: 'form-control' %>
+        <%= error_message_on :banner, :url %>
+      <% end %>
     </div>
 
     <div class="col-md-4">

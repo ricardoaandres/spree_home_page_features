@@ -17,11 +17,7 @@
               <h3><%= feature.title %></h3>
             <% end %>
 
-            <% if feature.product %>
-              <%= link_to tag(:span), spree.product_path(feature.product) %>
-            <% elsif feature.taxon %>
-              <%= link_to tag(:span), seo_url(feature.taxon) %>
-            <% end %>
+            <%= link_to tag(:span), feature.display_url %>
 
             <% if feature.display_body? %>
               <p><%= feature.body %></p>

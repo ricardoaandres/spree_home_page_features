@@ -1,9 +1,13 @@
 module Spree
   class Banner < ActiveRecord::Base
     include GlobalID::Identification
+    include Spree::Core::Engine.routes.url_helpers
 
     validates :title, presence: true, length: { minimum: 1 }
     validates :body,  presence: true, length: { minimum: 1 }, unless: :image
+
+    validates :url, format: URI::regexp(%w(http https)), unless: Proc.new { |b| b.url.blank? }
+    validates :url, presence: true, if: Proc.new { |b| b.product_id.blank? and b.taxon_id.blank? }
 
     has_attached_file :image,
                       :url => '/spree/banners/:id/:style/:basename.:extension',
@@ -43,6 +47,20 @@ module Spree
       self.publish ? "<i class='icon icon-ok'></i>".html_safe : '<br/>'.html_safe
     end
 
+    def display_url
+      if url.present?
+        return url
+      else
+        if taxon && product
+          product_path(product, taxon_id: taxon.id)
+        elsif product
+          product_path(product)
+        elsif taxon
+          nested_taxons_path(taxon.permalink)
+        end
+      end
+    end
+
     class << self
       def styles
         @styles ||= []
@@ -65,7 +83,7 @@ module Spree
       [
        :title, :body, :publish, :style, :image, :product_id, :taxon_id,
        :image_file_name, :image_file_size, :image_content_type, :image_updated_at,
-       :display_title, :display_body, :banner_category_id
+       :display_title, :display_body, :banner_category_id, :url
       ]
     end
   end
