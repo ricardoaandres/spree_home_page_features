@@ -23,6 +23,8 @@ module Spree
     scope :by_category_name, -> (banner_category) { joins(:banner_category).where(spree_banner_categories: {name: banner_category}) }
     scope :by_category,      -> (banner_category) { where(spree_banners: {banner_category_id: banner_category}) }
 
+    scope :by_style, -> (name) { where(spree_banners: {style: name}) }
+
     belongs_to :product
     belongs_to :taxon
     belongs_to :banner_category
