@@ -1,4 +1,4 @@
-<% features = Spree::Banner.published %>
+<% features = defined?(features) ? banners : Spree::Banner.published %>
 
 <% if features.any? %>
   <!-- Carrusel -->
@@ -14,13 +14,13 @@
 
           <div class="carousel-caption">
              <% if feature.display_title? %>
-              <h3><%= feature.title %></h3>
+              <h3><%= feature.title.html_safe %></h3>
             <% end %>
 
             <%= link_to tag(:span), feature.display_url %>
 
             <% if feature.display_body? %>
-              <p><%= feature.body %></p>
+              <p><%= feature.body.html_safe %></p>
             <% end %>
           </div>
         </div>
