@@ -1,4 +1,4 @@
-<% features = defined?(features) ? banners : Spree::Banner.published %>
+<% features = defined?(banners) ? banners : Spree::Banner.published %>
 
 <% if features.any? %>
   <!-- Carrusel -->
