@@ -14,7 +14,7 @@ module Spree
                       :path => ':rails_root/public/spree/banners/:id/:style/:basename.:extension',
                       :styles => Proc.new { |attachment| attachment.instance.image_styles }
 
-    validates_attachment_presence :image, unless: :body
+    validates_attachment_presence :image, unless: Proc.new { |b| b.body.present? }
 
     validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/
 
