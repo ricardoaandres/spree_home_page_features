@@ -7,6 +7,7 @@ FactoryGirl.define do
   end
 
   factory :invalid_banner_category, class: Spree::BannerCategory do
+    name nil
   end
 
   factory :banner, class: Spree::Banner do
@@ -27,5 +28,6 @@ FactoryGirl.define do
   end
 
   factory :invalid_banner, class: Spree::Banner do
+    title nil
   end
 end

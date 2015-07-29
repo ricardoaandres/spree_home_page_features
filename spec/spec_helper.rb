@@ -4,6 +4,7 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 
 require 'rspec/rails'
+require 'database_cleaner'
 require 'ffaker'
 require 'shoulda/matchers'
 require "paperclip/matchers"
@@ -33,6 +34,7 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::ControllerRequests, type: :controller
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::AuthorizationHelpers
+  config.include Devise::TestHelpers, type: :controller
 
   # == Mock Framework
   #
@@ -50,4 +52,17 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  config.before :suite do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.before :each do
+    DatabaseCleaner.start
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
+  end
 end
